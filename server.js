@@ -9,6 +9,15 @@ app.listen(3000);
 app.set('view engine', 'ejs');
 
 
+/// Using Middleware
+
+// use next to move forward but do not send res back
+app.use((req,res,next) =>
+{
+     console.log("Entered Middleware");
+     console.log("Method: ", req.method);
+     next();
+})
 
 // Making a get request and passing that data onto the view file 
 app.get('/', (req, res) => {
@@ -17,7 +26,7 @@ app.get('/', (req, res) => {
       {title: 'Mario finds stars', snippet: 'Lorem ipsum dolor sit amet consectetur'},
       {title: 'How to defeat bowser', snippet: 'Lorem ipsum dolor sit amet consectetur'},
     ];
-    res.render('index', { title: 'Home', blogs });
+    res.render('index', { title: 'Systems Limited', blogs });
   });
 
 
