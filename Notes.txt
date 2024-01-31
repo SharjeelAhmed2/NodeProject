@@ -5,3 +5,7 @@ Middleware is a piece of code that executes between request to response
 Request made goes to middleware and sits in middleware until response is sent 
 
 .use method is used as a middleware
+
+In order to access files such as a CSS file you need to make use of a middleware to do so in Express 
+
+we use express.static -> meaning the file become available for everyone to use 

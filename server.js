@@ -1,4 +1,5 @@
 const express = require("express");
+const morgan = require("morgan");
 
 const app = express();
 
@@ -12,12 +13,15 @@ app.set('view engine', 'ejs');
 /// Using Middleware
 
 // use next to move forward but do not send res back
-app.use((req,res,next) =>
-{
-     console.log("Entered Middleware");
-     console.log("Method: ", req.method);
-     next();
-})
+// app.use((req,res,next) =>
+// {
+//      console.log("Entered Middleware");
+//      console.log("Method: ", req.method);
+//      next();
+// })
+
+app.use(morgan('dev'));
+app.use(express.static("public"));
 
 // Making a get request and passing that data onto the view file 
 app.get('/', (req, res) => {
