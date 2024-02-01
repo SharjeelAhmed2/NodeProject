@@ -16,22 +16,22 @@ mongoose.connect(mongoURI).then((result) => {app.listen(3000);console.log("Conne
 
  /// Manually Save Data in your DB 
 
- app.get('/create-blog', (req,res)=>
- {
-  const saveToDB = new Blog(
-    {
-      title:"Title",
-      snippets : "Empty", 
-      body: "This is some random dummy Text"
-    }
-  );
-  saveToDB.save().then((result)=>{
-    res.send(result);
-  }).catch((err) => {
-     console.log(err);
-  });
+//  app.get('/create-blog', (req,res)=>
+//  {
+//   const saveToDB = new Blog(
+//     {
+//       title:"Title",
+//       snippets : "Empty", 
+//       body: "This is some random dummy Text"
+//     }
+//   );
+//   saveToDB.save().then((result)=>{
+//     res.send(result);
+//   }).catch((err) => {
+//      console.log(err);
+//   });
 
- })
+//  })
 
 // using view engine
 app.set('view engine', 'ejs');
