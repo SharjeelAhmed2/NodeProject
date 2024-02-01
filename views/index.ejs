@@ -11,7 +11,7 @@
       <% blogs.forEach(blog => { %>
 
         <h3 class="title"><%= blog.title %></h3>
-        <p class="snippet"><%= blog.body %></p>
+        <p class="snippet"><%= blog.snippets ? blog.snippets : "No Snippet" %></p>
 
       <% }) %>
     <% } else { %>

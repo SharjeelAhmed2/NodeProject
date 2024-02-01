@@ -37,3 +37,17 @@ when just fetching data, you can use the method of your Model class directly
 //   });
 
 //  })
+
+
+for making posts request we require a middleware
+
+
+/// Using Middleware
+
+// use next to move forward but do not send res back
+// app.use((req,res,next) =>
+// {
+//      console.log("Entered Middleware");
+//      console.log("Method: ", req.method);
+//      next();
+// })

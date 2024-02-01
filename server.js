@@ -19,24 +19,12 @@ mongoose.connect(mongoURI).then((result) => {app.listen(3000);console.log("Conne
 app.set('view engine', 'ejs');
 
 
-/// Using Middleware
-
-// use next to move forward but do not send res back
-// app.use((req,res,next) =>
-// {
-//      console.log("Entered Middleware");
-//      console.log("Method: ", req.method);
-//      next();
-// })
 
 app.use(morgan('dev'));
+// this is the middleware we use
+app.use(express.urlencoded({extended:true}))
 app.use(express.static("public"));
 
-// Making a get request and passing that data onto the view file 
-app.get('/', (req, res) => {
-    res.redirect('/home');
-
-  });
 
 /// Show data on FrontEnd
 
@@ -51,6 +39,28 @@ app.get('/home',(req,res)=>
   }
   )
 })
+
+/// Making a post request 
+
+app.post('/createBlogs',(req,res)=>
+{
+    const newBlog = new Blog(req.body);
+
+    newBlog.save()
+    .then((result)=>
+    {
+      res.redirect('/home');
+    }).catch((err) => {
+      console.log(err);
+    });
+})
+
+// Making a get request and passing that data onto the view file 
+app.get('/', (req, res) => {
+  res.redirect('/home');
+
+});
+
 
   // renders about page
   app.get('/about', (req, res) => {
