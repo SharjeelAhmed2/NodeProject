@@ -17,3 +17,23 @@ mongodb password: 9QouLC6XJu2KKleH
 while using mongodb if you want to post a data you use an instance of your Model (find it in the code for better understanding)
 
 when just fetching data, you can use the method of your Model class directly 
+
+
+ /// Manually Save Data in your DB 
+
+//  app.get('/create-blog', (req,res)=>
+//  {
+//   const saveToDB = new Blog(
+//     {
+//       title:"Title",
+//       snippets : "Empty", 
+//       body: "This is some random dummy Text"
+//     }
+//   );
+//   saveToDB.save().then((result)=>{
+//     res.send(result);
+//   }).catch((err) => {
+//      console.log(err);
+//   });
+
+//  })

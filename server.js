@@ -14,24 +14,6 @@ const mongoURI = "mongodb+srv://sharjeel614:getlost01@bench-period.updwel8.mongo
 // Thid is how you connect to Database 
 mongoose.connect(mongoURI).then((result) => {app.listen(3000);console.log("Connected to 3000")}).catch((err)=> {console.log(err)});
 
- /// Manually Save Data in your DB 
-
-//  app.get('/create-blog', (req,res)=>
-//  {
-//   const saveToDB = new Blog(
-//     {
-//       title:"Title",
-//       snippets : "Empty", 
-//       body: "This is some random dummy Text"
-//     }
-//   );
-//   saveToDB.save().then((result)=>{
-//     res.send(result);
-//   }).catch((err) => {
-//      console.log(err);
-//   });
-
-//  })
 
 // using view engine
 app.set('view engine', 'ejs');
@@ -52,14 +34,23 @@ app.use(express.static("public"));
 
 // Making a get request and passing that data onto the view file 
 app.get('/', (req, res) => {
-    const blogs = [
-      {title: 'Yoshi finds eggs', snippet: 'Lorem ipsum dolor sit amet consectetur'},
-      {title: 'Mario finds stars', snippet: 'Lorem ipsum dolor sit amet consectetur'},
-      {title: 'How to defeat bowser', snippet: 'Lorem ipsum dolor sit amet consectetur'},
-    ];
-    res.render('index', { title: 'Systems Limited', blogs });
+    res.redirect('/home');
+
   });
 
+/// Show data on FrontEnd
+
+app.get('/home',(req,res)=>
+{
+  // the find is an asynchronous task so we wait for this hence then and catch
+  Blog.find().then((result)=>
+  {
+    res.render('index', { title: 'Systems Limited', blogs: result});
+  }).catch((err)=>{
+    console.log(err);
+  }
+  )
+})
 
   // renders about page
   app.get('/about', (req, res) => {
