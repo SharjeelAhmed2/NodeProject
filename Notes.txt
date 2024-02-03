@@ -51,3 +51,10 @@ for making posts request we require a middleware
 //      console.log("Method: ", req.method);
 //      next();
 // })
+
+
+Creating Detail page lohic: 
+
+you create a url through ejs page 
+
+then create a get request for that URL and get the daataaa
