@@ -55,6 +55,19 @@ app.post('/createBlogs',(req,res)=>
     });
 })
 
+/// Making a get request that will render content of a single blog on a page
+
+app.get('/blogs/:id', (req,res) =>{
+  // save id in a variable
+  const id = req.params.id;
+  console.log(id);
+  Blog.findById(id).then((result)=>
+{
+  res.render('details', {blog:result, title: 'Blog Details'})
+}).catch((err)=>{console.log(err);})
+})
+
+
 // Making a get request and passing that data onto the view file 
 app.get('/', (req, res) => {
   res.redirect('/home');
