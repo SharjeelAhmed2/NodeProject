@@ -68,6 +68,16 @@ app.get('/blogs/:id', (req,res) =>{
 })
 
 
+/// delete request
+
+app.delete('/blogs/:id', (req,res) => {
+   const id = req.params.id;
+
+   Blog.findByIdAndDelete(id)
+   .then((result) => {res.json({redirect: '/home'})})
+   .catch((err)=>{console.log(err)});
+})
+
 // Making a get request and passing that data onto the view file 
 app.get('/', (req, res) => {
   res.redirect('/home');
