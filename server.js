@@ -1,7 +1,7 @@
 const express = require("express");
 const { default: mongoose } = require("mongoose");
 const morgan = require("morgan");
-const Blog = require("./models/blogsdata");
+const router = require("./routes/router");
 
 const app = express();
 
@@ -26,57 +26,6 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.static("public"));
 
 
-/// Show data on FrontEnd
-
-app.get('/home',(req,res)=>
-{
-  // the find is an asynchronous task so we wait for this hence then and catch
-  Blog.find().then((result)=>
-  {
-    res.render('index', { title: 'Systems Limited', blogs: result});
-  }).catch((err)=>{
-    console.log(err);
-  }
-  )
-})
-
-/// Making a post request 
-
-app.post('/createBlogs',(req,res)=>
-{
-    const newBlog = new Blog(req.body);
-
-    newBlog.save()
-    .then((result)=>
-    {
-      res.redirect('/home');
-    }).catch((err) => {
-      console.log(err);
-    });
-})
-
-/// Making a get request that will render content of a single blog on a page
-
-app.get('/blogs/:id', (req,res) =>{
-  // save id in a variable
-  const id = req.params.id;
-  console.log(id);
-  Blog.findById(id).then((result)=>
-{
-  res.render('details', {blog:result, title: 'Blog Details'})
-}).catch((err)=>{console.log(err);})
-})
-
-
-/// delete request
-
-app.delete('/blogs/:id', (req,res) => {
-   const id = req.params.id;
-
-   Blog.findByIdAndDelete(id)
-   .then((result) => {res.json({redirect: '/home'})})
-   .catch((err)=>{console.log(err)});
-})
 
 // Making a get request and passing that data onto the view file 
 app.get('/', (req, res) => {
@@ -90,11 +39,11 @@ app.get('/', (req, res) => {
     res.render('about', { title: 'About' });
   });
   
-  // Create a new blog page
-  app.get('/blogs/create', (req, res) => {
-    res.render('create', { title: 'Create a new blog' });
-  });
-  
+
+
+  // use a middleware 
+ app.use(router);
+
   // 404 error page
   app.use((req, res) => {
     res.status(404).render('error', { title: '404' });
