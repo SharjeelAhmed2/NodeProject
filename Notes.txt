@@ -58,3 +58,14 @@ Creating Detail page lohic:
 you create a url through ejs page 
 
 then create a get request for that URL and get the daataaa
+
+
+/// For controllers we just made arrow functions and copy pasted the logic of get post in them 
+
+we then later called those function in our routes which works as routers for navigating 
+to pages and doing requests 
+
+which was later called as a middleware in the server js class 
+
+
+AND THAT WRAPS IT UP!!!!
